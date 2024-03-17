@@ -3,8 +3,7 @@ require("dotenv").config();
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-
-const apiRouter = require("./routes/api");
+const createError = require("http-errors");
 
 const app = express();
 
@@ -22,11 +21,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use("/", apiRouter);
+const userRouter = require("./routes/userRouter");
+const chatRouter = require("./routes/chatRouter");
+const messageRouter = require("./routes/messageRouter");
+
+app.use("/api/v1/users", userRouter);
+// app.use("/api/v1/chat", chatRouter);
+// app.use("/api/v1/message", messageRouter);
 
 app.use(function (req, res, next) {
   next(createError(404));
 });
+
 app.use((err, req, res, next) => {
   res.status(err.status || 500).json(err.message);
 });
