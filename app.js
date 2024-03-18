@@ -26,7 +26,7 @@ const chatRouter = require("./routes/chatRouter");
 const messageRouter = require("./routes/messageRouter");
 
 app.use("/api/v1/users", userRouter);
-// app.use("/api/v1/chat", chatRouter);
+app.use("/api/v1/chat", chatRouter);
 app.use("/api/v1/message", messageRouter);
 
 app.use(function (req, res, next) {
