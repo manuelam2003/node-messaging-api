@@ -29,6 +29,8 @@ app.use("/api/v1/users", userRouter);
 app.use("/api/v1/chat", chatRouter);
 app.use("/api/v1/message", messageRouter);
 
+// TODO: implement websocket
+
 app.use(function (req, res, next) {
   next(createError(404));
 });
